@@ -4,23 +4,23 @@ import getConfig from '../../components/utils/getConfig';
 import { setIsLoading } from './isLoading.slice';
 
 export const purchasesSlice = createSlice({
-    name: 'purchases',
+    name: 'cart',
     initialState: [],
     reducers: {
-        setPurchases: (state, action) => {
+        setCart: (state, action) => {
             return action.payload;
         }
     }
 })
 
-export const getPurchasesThunk = () => (dispatch) => {
+export const cartThunk = () => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios
-      .get("https://e-commerce-api.academlo.tech/api/v1/purchases", getConfig()) //El getconfig es para enviar la key que se consumio desde el local storage de la carpeta utils
-      .then((res) => dispatch(setPurchases(res.data.data.purchases)))
+      .get("https://e-commerce-api.academlo.tech/api/v1/cart", getConfig()) //El getconfig es para enviar la key que se consumio desde el local storage de la carpeta utils
+      .then((res) => dispatch(setCart(res.data.data.cart.products)))
       .finally(() => dispatch(setIsLoading(false)));
   };
 
-  export const { setPurchases } = purchasesSlice.actions;
+  export const { setCart } = purchasesSlice.actions;
 
   export default purchasesSlice.reducer;

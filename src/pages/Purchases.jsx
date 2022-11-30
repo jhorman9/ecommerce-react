@@ -27,13 +27,11 @@ const Purchases = () => {
                                 <div key={product.title}>
                                     <Link to={`/detail/${product.id}`}>
                                         <Container>
-                                            <Row className='justify-content-center align-self-center h-auto pb-5'>
-                                                <Col>
-                                                    <h3><b>brand: {product.brand}</b></h3>
+                                            <Row className='justify-content-center align-self-center h-auto mb-5'>
                                                     <h3><b>Product: </b>{product.title}</h3>
                                                     <h3><b>Price: </b>${product.price}</h3>
                                                     <h3><b>Purchase Date: </b>{product.createdAt}</h3>
-                                                </Col>
+                                                    <h3><b>brand: {product.brand}</b></h3>
                                             </Row>
                                         </Container>
                                     </Link>
