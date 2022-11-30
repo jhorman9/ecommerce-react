@@ -10,6 +10,6 @@ export const isLoadingSlice = createSlice({
     }
 })
 
-export const {setIsLoading} = isLoadingSlice.actions;
+export const { setIsLoading } = isLoadingSlice.actions;
 
 export default isLoadingSlice.reducer;
