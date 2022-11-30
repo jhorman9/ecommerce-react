@@ -1,1 +1,1 @@
-ecommerce-jhorman-vite.netlify.app
+https://ecommerce-jhorman-vite.netlify.app
