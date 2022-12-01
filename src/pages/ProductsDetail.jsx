@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Button, ButtonGroup, Card, Col, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+import { checkOutCartThunk, createCartThunk } from '../store/slice/cart.slice';
 import { getProductsThunk } from '../store/slice/products.slice';
 
 const ProductsDetail = () => {
@@ -15,12 +16,13 @@ const ProductsDetail = () => {
     }, [])
 
     const productsList = useSelector(state => state.products);
+
     const productDetail = productsList.find(product => product.id === +id)
     const relatedProduct = productsList.filter(related => related?.category.id == productDetail?.category.id && related.id !== productDetail.id)
 
 
     const [counter, setCounter] = useState(0);
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState("");
 
     const next = () => {
         setCounter(counter + 1);
@@ -30,21 +32,34 @@ const ProductsDetail = () => {
     };
 
 
+    const addCart = () => {
+        const productToCart = {
+            id: productDetail.id, //id del producto
+            quantity: quantity //cantidad del producto
+        }
+        dispatch(createCartThunk(productToCart)) //despachamos
+    }
+
     return (
         <>
             <div>
+                <input type="text" 
+                onChange={(e) => setQuantity(e.target.value)}
+                value={quantity}
+                />
+                <Button onClick={addCart}>ADD</Button>
                 <div className="home--and__title">
                     <h2>Home</h2><h2 style={{ fontSize: 16 }}>{productDetail?.title}</h2>
                 </div>
                 <Row>
                     <Col lg className='detail--img'>
-                        <button onClick={prev} disabled={counter == 0}><i className="fa-solid fa-chevron-left"></i></button>
+                        <button className='btn-detail' onClick={prev} disabled={counter == 0}><i className="fa-solid fa-chevron-left "></i></button>
                         <Card.Img
                             variant="top"
                             src={productDetail?.productImgs[counter]}
                             style={{ height: 290, objectFit: 'contain'}}
                         />
-                        <button onClick={next} disabled={counter == 2}><i className="fa-solid fa-chevron-right"></i></button>
+                        <button className='btn-detail' onClick={next} disabled={counter == 2}><i className="fa-solid fa-chevron-right"></i></button>
                     </Col>
                     <Col lg className='detail--description'>
                         <h2>{productDetail?.title}</h2>

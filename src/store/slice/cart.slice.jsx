@@ -21,6 +21,22 @@ export const cartThunk = () => (dispatch) => {
       .finally(() => dispatch(setIsLoading(false)));
   };
 
-  export const { setCart } = purchasesSlice.actions;
+  export const createCartThunk = (productToCart) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios
+      .post("https://e-commerce-api.academlo.tech/api/v1/cart", productToCart, getConfig()) //El getconfig es para enviar la key que se consumio desde el local storage de la carpeta utils
+      .then((res) => dispatch(cartThunk()))
+      .finally(() => dispatch(setIsLoading(false)));
+  };
 
-  export default purchasesSlice.reducer;
+  export const checkOutCartThunk = () => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.post('https://e-commerce-api.academlo.tech/api/v1/purchases', {}, getConfig())
+        .then(() => dispatch(setCart([])))
+        .finally(() => dispatch(setIsLoading(false)));
+}
+
+
+export const { setCart } = purchasesSlice.actions;
+
+export default purchasesSlice.reducer;

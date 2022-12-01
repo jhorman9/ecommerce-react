@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { CardGroup, Offcanvas } from 'react-bootstrap';
+import { Button, CardGroup, Offcanvas } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartThunk } from '../store/slice/cart.slice';
+import { cartThunk, checkOutCartThunk } from '../store/slice/cart.slice';
 
 const Cart = ({show, handleClose, }) => {
 
@@ -23,13 +23,14 @@ const Cart = ({show, handleClose, }) => {
                         <Offcanvas.Body>
                             {
                                 cart.map(cart => (
-                                    <div className='mb-4'>
+                                    <div key={cart.id}>
                                         <h4>{cart.title}</h4>
                                         <h6>${cart.price}</h6>
                                     </div>
                                     
                                 ))
                             }
+                        <Button onClick={() => dispatch(checkOutCartThunk())}>CheckOut</Button>
                         </Offcanvas.Body>
             </Offcanvas>
     );
