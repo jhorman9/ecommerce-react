@@ -32,7 +32,6 @@ const Purchases = () => {
                                                     {product.productsInCart?.createdAt}
                                                 </Card.Header>
                                                 <Card.Body>
-                                                    <Card.Title>{product.title}</Card.Title>
                                                         <Row>
                                                             <Col>
                                                                 {product.title}
