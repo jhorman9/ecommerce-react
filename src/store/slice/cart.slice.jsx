@@ -34,7 +34,14 @@ export const cartThunk = () => (dispatch) => {
     return axios.post('https://e-commerce-api.academlo.tech/api/v1/purchases', {}, getConfig())
         .then(() => dispatch(setCart([])))
         .finally(() => dispatch(setIsLoading(false)));
-}
+  };
+
+  export const deleteProductThunk = (id) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.delete(`https://e-commerce-api.academlo.tech/api/v1/cart/${id}`, getConfig())
+        .then(() => dispatch(cartThunk()))
+        .finally(() => dispatch(setIsLoading(false)));
+  };
 
 
 export const { setCart } = purchasesSlice.actions;

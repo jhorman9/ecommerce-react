@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { Button, CardGroup, Offcanvas } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Card, CardGroup, Col, Offcanvas, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartThunk, checkOutCartThunk } from '../store/slice/cart.slice';
+import { cartThunk, checkOutCartThunk, deleteProductThunk } from '../store/slice/cart.slice';
 
-const Cart = ({show, handleClose, }) => {
+const Cart = ({ show, handleClose }) => {
 
     const dispatch = useDispatch();
 
@@ -13,24 +13,52 @@ const Cart = ({show, handleClose, }) => {
         dispatch(cartThunk())
     }, [])
 
-    console.log(cart)
+    const filterPrice = cart.map(price => price.price)
+  
+    const [ totalPrice, setTotalPrice ] = useState(0);
+ 
+    useEffect(() => {
+     let total = 0;
+     cart.forEach(product => {
+         total += product.price * product.productsInCart.quantity;
+     })
+     setTotalPrice(total)
+    }, [cart])
 
     return (
         <Offcanvas show={show} onHide={handleClose}>
                         <Offcanvas.Header closeButton>
-                        <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                        <Offcanvas.Title>Cart</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             {
                                 cart.map(cart => (
                                     <div key={cart.id}>
-                                        <h4>{cart.title}</h4>
-                                        <h6>${cart.price}</h6>
+                                        <div>
+                                            <Card className='mb-4 py-2'  style={{ width: '100%' }}>
+                                                <Row >
+                                                    <Col>
+                                                        <h4 style={{ marginLeft: '7px' }}>{cart.title}</h4>
+                                                        <h6 style={{ marginLeft: '7px' }}>${cart.price}</h6>
+                                                    </Col>     
+                                                    <Col className='cart--product__quantity'>
+                                                        <p>{cart.productsInCart.quantity}</p>
+                                                        <Row>
+                                                            <div className='cart--product__delete'>
+                                                                <i onClick={() => dispatch(deleteProductThunk(cart.id))} className="fa-solid fa-trash"></i>
+                                                            </div>    
+                                                        </Row>
+                                                    </Col>
+                                                </Row>
+                                            </Card>
+                                        </div>
                                     </div>
-                                    
                                 ))
                             }
-                        <Button onClick={() => dispatch(checkOutCartThunk())}>CheckOut</Button>
+                                        <div className="total--cart">
+                                            <p>Total: ${totalPrice}</p>
+                                        </div>
+                        <Button onClick={() => dispatch(checkOutCartThunk())}>Check Out</Button>
                         </Offcanvas.Body>
             </Offcanvas>
     );

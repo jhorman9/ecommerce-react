@@ -22,7 +22,7 @@ const ProductsDetail = () => {
 
 
     const [counter, setCounter] = useState(0);
-    const [quantity, setQuantity] = useState("");
+    const [quantity, setQuantity] = useState(1);
 
     const next = () => {
         setCounter(counter + 1);
@@ -40,18 +40,20 @@ const ProductsDetail = () => {
         dispatch(createCartThunk(productToCart)) //despachamos
     }
 
+    const counterIncrement = () => {
+        setQuantity(quantity+1)
+    }
+
+    const counterDecrement = () => {
+        setQuantity(quantity-1)
+        if(quantity <= 0) {
+            setQuantity(0)
+        }
+    }
+
     return (
-        <>
-            <div>
-                <input type="text" 
-                onChange={(e) => setQuantity(e.target.value)}
-                value={quantity}
-                />
-                <Button onClick={addCart}>ADD</Button>
-                <div className="home--and__title">
-                    <h2>Home</h2><h2 style={{ fontSize: 16 }}>{productDetail?.title}</h2>
-                </div>
-                <Row>
+        <div className='container'>
+                    <Row>
                     <Col lg className='detail--img'>
                         <button className='btn-detail' onClick={prev} disabled={counter == 0}><i className="fa-solid fa-chevron-left "></i></button>
                         <Card.Img
@@ -69,10 +71,21 @@ const ProductsDetail = () => {
                         <Button className="btn--car__detail">
                             <span>ADD TO CART  </span><i className="fa-solid fa-cart-arrow-down"></i>
                         </Button>
+                        <div className='quantity'>
+                            <div className="counter-quantity">
+                                <button onClick={counterDecrement}>-</button>
+                                <input type="text" 
+                                    onChange={(e) => setQuantity(e.target.value)}
+                                    value={quantity}
+                                    />
+                                <button onClick={counterIncrement}>+</button>
+                            </div>
+                                <Button onClick={addCart}>ADD</Button>
+                            </div>
                     </Col>
                 </Row>
-            </div>
             <ul className='related--product'>
+                <h4>Related products</h4>
                 <Row xs={1} md={2} lg={4} className="g-4">
                     {relatedProduct.map(related => (
                         <Col key={related.id}>
@@ -104,7 +117,7 @@ const ProductsDetail = () => {
                     ))}
                 </Row>
             </ul>
-        </>
+        </div>
 
 
     );

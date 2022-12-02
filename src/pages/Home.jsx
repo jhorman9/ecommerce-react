@@ -60,6 +60,7 @@ const Home = () => {
                                     <Card>
                                         <Link to={`/detail/${product.id}`}>
                                             <Card.Img
+
                                                 variant="top"
                                                 src={product.productImgs[0]}
                                                 style={{ height: 210, objectFit: 'contain', padding: 30 }}

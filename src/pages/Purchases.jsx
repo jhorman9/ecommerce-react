@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPurchasesThunk } from '../store/slice/purchases.slice';
@@ -21,18 +21,35 @@ const Purchases = () => {
             <h1 className='mb-5'>Purchases</h1>
             {
                     purchases.map(purchase => (
-                        <div key={purchase.id}>
+                        <div className='products-purchases' key={purchase.id}>
                             {
                             purchase.cart.products.map(product => (
                                 <div key={product.title}>
                                     <Link to={`/detail/${product.id}`}>
                                         <Container>
-                                            <Row className='justify-content-center align-self-center h-auto mb-5'>
-                                                    <h3><b>Product: </b>{product.title}</h3>
-                                                    <h3><b>Price: </b>${product.price}</h3>
-                                                    <h3><b>Purchase Date: </b>{product.createdAt}</h3>
-                                                    <h3><b>brand: {product.brand}</b></h3>
-                                            </Row>
+                                            <Card border="dark" style={{ width: '100%' }}>
+                                                <Card.Header>
+                                                    {product.productsInCart?.createdAt}
+                                                </Card.Header>
+                                                <Card.Body>
+                                                    <Card.Title>{product.title}</Card.Title>
+                                                        <Row>
+                                                            <Col>
+                                                                {product.title}
+                                                            </Col>
+                                                            <Col>
+                                                                <p className='quantity-productInCart'>
+                                                                    {product.productsInCart?.quantity}
+                                                                </p>
+                                                            </Col>
+                                                            <Col>
+                                                                <p>
+                                                                    Total: ${product.productsInCart?.quantity * product.price}
+                                                                </p>
+                                                            </Col>
+                                                        </Row>
+                                                </Card.Body>
+                                            </Card>
                                         </Container>
                                     </Link>
                                 </div>
