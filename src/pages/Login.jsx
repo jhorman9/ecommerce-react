@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Card, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
@@ -30,6 +30,16 @@ const Login = () => {
     }
 
     return (
+        <>
+        <Card className='mb-4 m-auto' border="dark" style={{ width: '19.5rem' }}>
+          <Card.Header className='text-center'>USER</Card.Header>
+          <Card.Body>
+            <Card.Text>Email: Jhormannieto@hotmail.com</Card.Text>
+            <Card.Text>
+              Password: 1234567890
+            </Card.Text>
+          </Card.Body>
+        </Card>
         <Form onSubmit={handleSubmit(submit)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -56,6 +66,7 @@ const Login = () => {
              Submit
             </Button>
          </Form>
+         </>
     );
 };
 
