@@ -38,6 +38,7 @@ const ProductsDetail = () => {
             quantity: quantity //cantidad del producto
         }
         dispatch(createCartThunk(productToCart)) //despachamos
+        setQuantity(1)
     }
 
     const counterIncrement = () => {
@@ -68,7 +69,7 @@ const ProductsDetail = () => {
                         <p>{productDetail?.description}</p>
                         <span>Price</span>
                         <span>{productDetail?.price}</span>
-                        <Button className="btn--car__detail">
+                        <Button className="btn--car__detail" onClick={addCart}>
                             <span>ADD TO CART  </span><i className="fa-solid fa-cart-arrow-down"></i>
                         </Button>
                         <div className='quantity'>
@@ -80,8 +81,7 @@ const ProductsDetail = () => {
                                     />
                                 <button onClick={counterIncrement}>+</button>
                             </div>
-                                <Button onClick={addCart}>ADD</Button>
-                            </div>
+                        </div>
                     </Col>
                 </Row>
             <ul className='related--product'>

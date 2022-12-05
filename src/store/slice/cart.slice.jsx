@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import getConfig from '../../components/utils/getConfig';
 import { setIsLoading } from './isLoading.slice';
+import Swal from 'sweetalert2'
 
 export const purchasesSlice = createSlice({
     name: 'cart',
@@ -43,6 +44,12 @@ export const cartThunk = () => (dispatch) => {
         .finally(() => dispatch(setIsLoading(false)));
   };
 
+  export const signUpThunk = (data) => (dispatch) => {
+      dispatch(setIsLoading(true));
+      return axios.post('https://e-commerce-api.academlo.tech/api/v1/users', data, getConfig())
+          .then(() => dispatch(cartThunk()))
+          .finally(() => dispatch(setIsLoading(false)))
+  }
 
 export const { setCart } = purchasesSlice.actions;
 

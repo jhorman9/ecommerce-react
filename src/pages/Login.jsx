@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
 const Login = () => {
@@ -17,7 +17,7 @@ const Login = () => {
             {
                 navigate("/")
                 console.log(res)
-                localStorage.setItem("token", res.data.data.token) //guatda una key
+                localStorage.setItem("token", res.data.data.token) //guarda una key
             })
         .catch(error => {
             if (error.response?.status === 404) {
@@ -31,15 +31,6 @@ const Login = () => {
 
     return (
         <>
-        <Card className='mb-4 m-auto' border="dark" style={{ width: '19.5rem' }}>
-          <Card.Header className='text-center'>USER</Card.Header>
-          <Card.Body>
-            <Card.Text>Email: Jhormannieto@hotmail.com</Card.Text>
-            <Card.Text>
-              Password: 1234567890
-            </Card.Text>
-          </Card.Body>
-        </Card>
         <Form onSubmit={handleSubmit(submit)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -65,6 +56,9 @@ const Login = () => {
             <Button variant="primary" type="submit">
              Submit
             </Button>
+            <Link to={`/signup`}>
+              <p className='registerUser'>If you do not have an account, register here</p>
+            </Link>
          </Form>
          </>
     );

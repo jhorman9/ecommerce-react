@@ -12,8 +12,6 @@ const Cart = ({ show, handleClose }) => {
     useEffect(() => {
         dispatch(cartThunk())
     }, [])
-
-    const filterPrice = cart.map(price => price.price)
   
     const [ totalPrice, setTotalPrice ] = useState(0);
  
