@@ -14,8 +14,6 @@ const Purchases = () => {
 
       const purchases = useSelector(state => state.purchases)
 
-      console.log(purchases)
-
     return (
         <div>
             <h1 className='mb-5'>Purchases</h1>

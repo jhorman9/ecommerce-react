@@ -19,6 +19,7 @@ const SignUp = () => {
     return (
     <Form onSubmit={handleSubmit(submit)}>
       <Form.Group className="mb-3">
+        
         <Form.Label className="pt-3">First name</Form.Label>
         <Form.Control {...register('firstName')} type="text" placeholder="Enter name" required />
 
