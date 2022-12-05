@@ -21,16 +21,16 @@ const NavBar = () => {
                 <Navbar.Brand>E-commerce</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link href="#features" as={Link} to='/'>Home</Nav.Link>
-                    <Nav.Link href="#pricing" as={Link} to='purchases'>Purchases</Nav.Link>
-                    <Nav.Link onClick={handleShow}>
-                        <i className="fa-solid fa-cart-shopping" style={{fontSize: 20}}></i>
-                    </Nav.Link>
-                </Nav>
-                <Nav>
-                    <Nav.Link as={Link} to='login'>Login <i className="fa-solid fa-right-to-bracket"></i></Nav.Link>
-                </Nav>
+                    <Nav className="me-auto">
+                        <Nav.Link href="#features" as={Link} to='/'>Home</Nav.Link>
+                        <Nav.Link href="#pricing" as={Link} to='purchases'>Purchases</Nav.Link>
+                        <Nav.Link onClick={handleShow}>
+                            <i className="fa-solid fa-cart-shopping" style={{fontSize: 20}}></i>
+                        </Nav.Link>
+                    </Nav>
+                    <Nav>
+                        <Nav.Link as={Link} to='login'>Login <i className="fa-solid fa-right-to-bracket"></i></Nav.Link>
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
                 <Cart 
