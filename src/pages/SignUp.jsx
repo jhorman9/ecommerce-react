@@ -20,22 +20,22 @@ const SignUp = () => {
     <Form onSubmit={handleSubmit(submit)}>
       <Form.Group className="mb-3">
         <Form.Label className="pt-3">First name</Form.Label>
-        <Form.Control {...register('firstName')} type="text" placeholder="Enter name" />
+        <Form.Control {...register('firstName')} type="text" placeholder="Enter name" required />
 
         <Form.Label className="pt-3" >Last name</Form.Label>
-        <Form.Control {...register('lastName')}  type="text" placeholder="Enter name" />
+        <Form.Control {...register('lastName')}  type="text" placeholder="Enter name" required />
 
         <Form.Label className="pt-3">Email address</Form.Label>
-        <Form.Control {...register('email')}  type="email" placeholder="Enter address" />
+        <Form.Control {...register('email')}  type="email" placeholder="Enter address" required />
 
         <Form.Label className="pt-3">Password</Form.Label>
-        <Form.Control {...register('password')} type="password" placeholder="Enter password" />
+        <Form.Control {...register('password')} type="password" placeholder="Enter password" required />
 
         <Form.Label className="pt-3">Phone</Form.Label>
-        <Form.Control {...register('phone')} type="text" placeholder="Enter name" />
+        <Form.Control {...register('phone')} type="text" placeholder="Enter name" required />
 
         <Form.Label className="pt-3">Role</Form.Label>
-        <Form.Control {...register('role')} type="text" placeholder="Enter name" />
+        <Form.Control {...register('role')} type="text" placeholder="Enter name" required />
 
       </Form.Group>
 
